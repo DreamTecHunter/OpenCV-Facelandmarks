@@ -27,8 +27,8 @@ def angle(p0, p1):
 
 def open_firefox(url: Union[str, None]):
     try:
-        os.system(url)
-        subprocess.Popen(url)
+        os.system(firefoxPath)
+        subprocess.Popen([firefoxPath+url])
     except:
         print("File might not be found, due to software-restriction")
     print("Firefox has been opened because of the users reaction!")
