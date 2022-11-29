@@ -3,7 +3,7 @@ import math
 import cv2, dlib
 from facePoints import facePoints
 import os , subprocess
-
+from typing import Union
 # define a video capture object
 vid = cv2.VideoCapture(0)
 
@@ -19,15 +19,26 @@ def sum(p0, p1):
     return math.sqrt((p0.x-p1.x)**2+(p0.y-p1.y)**2)
 
 
-firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
+
 def angle(p0, p1):
     return math.atan((p0.x-p1.x)/(p0.y-p1.y))
 
-def open_firefox():
+firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
+
+def open_firefox(url: Union[str, None]):
     os.system(firefoxPath)
-    subprocess.Popen([firefoxPath])
+    subprocess.Popen([firefoxPath] + url)
     print("Firefox has been opened because of the users reaction!")
 
+
+def head_inclined_reaction():
+    open_firefox("https://stackoverflow.com/")
+    print("Opened StackOverflow because of the users reaction!")
+
+
+def eye_lids_up_reaction():
+    open_firefox("https://github.com/Ventrum")
+    print("Opened Github because of the users reaction!")
 
 def analyze(faceLandmarkDetector, xy):
     # differenz first to last jaw point
@@ -43,6 +54,7 @@ def analyze(faceLandmarkDetector, xy):
         print("eyes winked")
     if right_eyelid_difference/ jaw_difference > 0.25 or left_eyelid_difference/ jaw_difference > 0.25:
         print("eye-lids-up")
+        eye_lids_up_reaction()
     if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
         print("Eyes closed")
         open_firefox()
@@ -54,6 +66,7 @@ def analyze(faceLandmarkDetector, xy):
         print("mouth opend")
     if False:
         print("head inclined")
+        head_inclined_reaction()
 
 
     
