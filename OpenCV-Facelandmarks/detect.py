@@ -1,4 +1,5 @@
 # import the opencv library
+from email import header
 import math
 import cv2, dlib
 from facePoints import facePoints
@@ -19,7 +20,7 @@ def sum(p0, p1):
     return math.sqrt((p0.x-p1.x)**2+(p0.y-p1.y)**2)
 
 
-
+firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 def angle(p0, p1):
     return math.atan((p0.x-p1.x)/(p0.y-p1.y))
 
@@ -28,6 +29,12 @@ firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 def open_firefox(url: Union[str, None]):
     os.system(firefoxPath)
     subprocess.Popen([firefoxPath] + url)
+def open_firefox():
+    try:
+        os.system(firefoxPath)
+        subprocess.Popen([firefoxPath])
+    except:
+        print("File might not be found, due to software-restriction")
     print("Firefox has been opened because of the users reaction!")
 
 
@@ -47,8 +54,9 @@ def analyze(faceLandmarkDetector, xy):
     right_eyelid_difference = (sum(faceLandmarkDetector.part(19), faceLandmarkDetector.part(41))+ sum(faceLandmarkDetector.part(20), faceLandmarkDetector.part(40)))/2
     left_eye_difference = (sum(faceLandmarkDetector.part(43), faceLandmarkDetector.part(47))+ sum(faceLandmarkDetector.part(44), faceLandmarkDetector.part(46)))/2
     right_eye_difference = (sum(faceLandmarkDetector.part(37), faceLandmarkDetector.part(41))+ sum(faceLandmarkDetector.part(38), faceLandmarkDetector.part(40)))/2
-    #head_angle = angle()
-   
+    head_angle = angle(faceLandmarkDetector.part(27),faceLandmarkDetector.part(8))/math.pi*360
+    print(head_angle)
+    
     print("-")
     if False:
         print("eyes winked")
@@ -64,10 +72,9 @@ def analyze(faceLandmarkDetector, xy):
         print("mouth-courner down")
     if False:
         print("mouth opend")
-    if False:
+    if head_angle < -30 or 30 < head_angle :
         print("head inclined")
         head_inclined_reaction()
-
 
     
 
