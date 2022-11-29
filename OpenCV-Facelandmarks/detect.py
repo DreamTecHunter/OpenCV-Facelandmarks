@@ -55,8 +55,7 @@ def analyze(faceLandmarkDetector, xy):
     left_eye_difference = (sum(faceLandmarkDetector.part(43), faceLandmarkDetector.part(47))+ sum(faceLandmarkDetector.part(44), faceLandmarkDetector.part(46)))/2
     right_eye_difference = (sum(faceLandmarkDetector.part(37), faceLandmarkDetector.part(41))+ sum(faceLandmarkDetector.part(38), faceLandmarkDetector.part(40)))/2
     head_angle = angle(faceLandmarkDetector.part(27),faceLandmarkDetector.part(8))/math.pi*360
-    print(head_angle)
-    
+    mouth_inner_height = (sum(faceLandmarkDetector.part(62), faceLandmarkDetector.part(66)))
     print("-")
     if False:
         print("eyes winked")
@@ -65,12 +64,12 @@ def analyze(faceLandmarkDetector, xy):
         eye_lids_up_reaction()
     if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
         print("Eyes closed")
-        open_firefox()
+        #open_firefox()
     if False:
         print("mouth-courner up")
     if False:
         print("mouth-courner down")
-    if False:
+    if mouth_inner_height/jaw_difference > 0.05:
         print("mouth opend")
     if head_angle < -30 or 30 < head_angle :
         print("head inclined")
