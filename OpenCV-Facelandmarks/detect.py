@@ -29,14 +29,10 @@ def analyze(faceLandmarkDetector, xy):
 
    
     print("-")
-    if right_eyelid_difference/ jaw_difference > 0.25:
-        print("right eye-lid expendet")
-    if left_eyelid_difference/ jaw_difference > 0.25:
-        print("left eye-lid expendet")
-    if  left_eye_difference/ jaw_difference < 0.0375:
-        print("left eye closed")
-    if  right_eye_difference/ jaw_difference < 0.0375:
-        print("right eye closed")
+    if right_eyelid_difference/ jaw_difference > 0.25 or left_eyelid_difference/ jaw_difference > 0.25:
+        print("eye-lids-up")
+    if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
+        print("Eyes closed")
 
     
 
