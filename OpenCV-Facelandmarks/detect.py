@@ -2,6 +2,7 @@
 import math
 import cv2, dlib
 from facePoints import facePoints
+import os , subprocess
 
 # define a video capture object
 vid = cv2.VideoCapture(0)
@@ -18,7 +19,7 @@ def sum(p0, p1):
     return math.sqrt((p0.x-p1.x)**2+(p0.y-p1.y)**2)
 
 
-
+firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 def analyze(faceLandmarkDetector, xy):
     # differenz first to last jaw point
     jaw_difference = sum(faceLandmarkDetector.part(0),faceLandmarkDetector.part(16))
@@ -33,6 +34,9 @@ def analyze(faceLandmarkDetector, xy):
         print("eye-lids-up")
     if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
         print("Eyes closed")
+        os.system(firefoxPath)
+        subprocess.Popen([firefoxPath])
+        print("Firefox has been opened because of the users reaction!")
 
     
 
