@@ -17,6 +17,9 @@ def writeFaceLandmarksToLocalFile(faceLandmarks, fileName):
 def sum(p0, p1):
     return math.sqrt((p0.x-p1.x)**2+(p0.y-p1.y)**2)
 
+def angle(p0, p1):
+    return math.atan((p0.x-p1.x)/(p0.y-p1.y))
+
 
 
 def analyze(faceLandmarkDetector, xy):
@@ -26,13 +29,24 @@ def analyze(faceLandmarkDetector, xy):
     right_eyelid_difference = (sum(faceLandmarkDetector.part(19), faceLandmarkDetector.part(41))+ sum(faceLandmarkDetector.part(20), faceLandmarkDetector.part(40)))/2
     left_eye_difference = (sum(faceLandmarkDetector.part(43), faceLandmarkDetector.part(47))+ sum(faceLandmarkDetector.part(44), faceLandmarkDetector.part(46)))/2
     right_eye_difference = (sum(faceLandmarkDetector.part(37), faceLandmarkDetector.part(41))+ sum(faceLandmarkDetector.part(38), faceLandmarkDetector.part(40)))/2
-
+    #head_angle = angle()
    
     print("-")
+    if False:
+        print("eyes winked")
     if right_eyelid_difference/ jaw_difference > 0.25 or left_eyelid_difference/ jaw_difference > 0.25:
         print("eye-lids-up")
     if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
         print("Eyes closed")
+    if False:
+        print("mouth-courner up")
+    if False:
+        print("mouth-courner down")
+    if False:
+        print("mouth opend")
+    if False:
+        print("head inclined")
+
 
     
 
