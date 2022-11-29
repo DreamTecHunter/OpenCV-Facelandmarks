@@ -2,6 +2,7 @@
 import math
 import cv2, dlib
 from facePoints import facePoints
+import os , subprocess
 
 # define a video capture object
 vid = cv2.VideoCapture(0)
@@ -17,9 +18,15 @@ def writeFaceLandmarksToLocalFile(faceLandmarks, fileName):
 def sum(p0, p1):
     return math.sqrt((p0.x-p1.x)**2+(p0.y-p1.y)**2)
 
+
+firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 def angle(p0, p1):
     return math.atan((p0.x-p1.x)/(p0.y-p1.y))
 
+def open_firefox():
+    os.system(firefoxPath)
+    subprocess.Popen([firefoxPath])
+    print("Firefox has been opened because of the users reaction!")
 
 
 def analyze(faceLandmarkDetector, xy):
@@ -38,6 +45,7 @@ def analyze(faceLandmarkDetector, xy):
         print("eye-lids-up")
     if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
         print("Eyes closed")
+        open_firefox()
     if False:
         print("mouth-courner up")
     if False:
