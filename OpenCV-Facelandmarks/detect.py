@@ -27,12 +27,9 @@ def angle(p0, p1):
 firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 
 def open_firefox(url: Union[str, None]):
-    os.system(firefoxPath)
-    subprocess.Popen([firefoxPath] + url)
-def open_firefox():
     try:
         os.system(firefoxPath)
-        subprocess.Popen([firefoxPath])
+        subprocess.Popen([firefoxPath] + url)
     except:
         print("File might not be found, due to software-restriction")
     print("Firefox has been opened because of the users reaction!")
