@@ -62,7 +62,7 @@ def analyze(faceLandmarkDetector, xy):
         eye_lids_up_reaction()
     if  left_eye_difference/ jaw_difference < 0.035 or right_eye_difference/ jaw_difference < 0.035:
         print("Eyes closed")
-        #open_firefox()
+        open_firefox("")
     if False:
         print("mouth-courner up")
     if False:
