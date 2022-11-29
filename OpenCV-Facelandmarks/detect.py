@@ -24,12 +24,11 @@ firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 def angle(p0, p1):
     return math.atan((p0.x-p1.x)/(p0.y-p1.y))
 
-firefoxPath = "C:\Program Files\Mozilla Firefox\firefox.exe"
 
 def open_firefox(url: Union[str, None]):
     try:
-        os.system(firefoxPath)
-        subprocess.Popen([firefoxPath] + url)
+        os.system(url)
+        subprocess.Popen(url)
     except:
         print("File might not be found, due to software-restriction")
     print("Firefox has been opened because of the users reaction!")
